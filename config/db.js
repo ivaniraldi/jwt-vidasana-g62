@@ -6,7 +6,7 @@ const config ={
     host: 'localhost',
     port: 5433,
     user: 'postgres',
-    password: 'iraldi11',
+    password: 'password',
     database: 'vida_sana',
     allowExitOnIdle: true
 }
