@@ -10,6 +10,16 @@ const sendEventos = async (req, res) => {
     }
 }
 
+const sendEvento = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const evento = await eventsModels.getEvento(id)
+        res.json(evento)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 const updateEvent= async (req, res) => {
     try {
         const { id } = req.params;
@@ -33,14 +43,13 @@ const deleteEvent = async (req, res) => {
         const { id } = req.params;
         const Authorization = req.header("Authorization");
         const token = Authorization.split("Bearer ")[1];
-        
         // Verificar y decodificar el token
         jwt.verify(token, "az_AZ");
-        const { email } = jwt.decode(token);
-        
+
         await eventsModels.deleteEvento(id);
         
-        res.send(`El usuario ${email} ha eliminado el evento de id ${id}`);
+        const eventos = await eventsModels.getEventos();
+        res.json(eventos);
     } catch (error) {
         res.status(error.code || 500).send(error);
     }
@@ -49,5 +58,6 @@ const deleteEvent = async (req, res) => {
 export const eventsController = {
     sendEventos,
     deleteEvent,
-    updateEvent
+    updateEvent,
+    sendEvento
 };

@@ -5,6 +5,11 @@ const getEventos = async () => {
     return eventos;
 }
 
+const getEvento = async (id) => {
+    const { rows: evento } = await pool.query("SELECT * FROM eventos WHERE id = " + id);
+    return evento;
+}
+
 const deleteEvento = async (id) => {
     const consulta = "DELETE FROM eventos WHERE id = $1";
     const values = [id];
@@ -22,5 +27,6 @@ const actualizarEvento = async (id, payload) => {
 export const eventsModels = {
     getEventos,
     deleteEvento,
-    actualizarEvento
+    actualizarEvento,
+    getEvento
 };

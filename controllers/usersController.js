@@ -15,7 +15,7 @@ const login = async (req, res) => {
     try {
         const { email, password } = req.body;
         await userModels.verificarCredenciales(email, password);
-        const token = jwt.sign({ email }, "az_AZ");
+        const token = jwt.sign({ email }, "az_AZ", { expiresIn: 20 });
         res.send(token);
     } catch (error) {
         console.log(error);

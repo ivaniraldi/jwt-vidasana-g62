@@ -13,4 +13,7 @@ app.use(cors());
 app.use("/", eventsRouter);
 app.use("/", usersRouter);
 
-app.listen(PORT, console.log("SERVER ON"));
+app.listen(PORT, () => console.log("SERVER ON"));
+
+// Exporta `app` para que pueda ser utilizado en las pruebas
+export { app };
